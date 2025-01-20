@@ -1,26 +1,35 @@
-// We declare the function with the exact name "fromEuroToDollar"
-const fromEuroToDollar = function(valueInEuro) {
-    // Convert the given valueInEuro to dollars
-    let valueInDollar = valueInEuro * 1.07;
-    // return the dollar value
-    return valueInDollar;
- }
+// app.js
 
-//Que un dollar es 167.4 Yenes segun mi calculadora"
-const fromDollarToYen = function(valueindollar) {
-    let valueInYen = valueindollar * 167.4;
+// Definimos el objeto con las tasas de conversión
+let oneEuroIs = {
+    "JPY": 156.5, // yen japonés
+    "USD": 1.07,  // dólar estadounidense
+    "GBP": 0.87   // libra esterlina
+};
 
-    return valueInYen;
- }
+// Función para convertir de dólares a yenes
+function fromDollarToYen(dollars) {
+    let euros = dollars / oneEuroIs["USD"]; // Convertimos dólares a euros
+    let yen = euros * oneEuroIs["JPY"]; // Convertimos euros a yenes
+    return yen;
+}
 
-//Que un pound es 136.1 Yenes segun mi calculadora"
-const fromYenToPound = function(valueinyen) {
-    let valueInPounds = valueinyen * 136.1;
+// Función para convertir de euros a dólares
+function fromEuroToDollar(euros) {
+    let dollars = euros * oneEuroIs["USD"]; // Convertimos euros a dólares
+    return dollars;
+}
 
-    return valueInPounds;
- }
+// Función para convertir de yenes a libras
+function fromYenToPound(yen) {
+    let euros = yen / oneEuroIs["JPY"]; // Convertimos yenes a euros
+    let pounds = euros * oneEuroIs["GBP"]; // Convertimos euros a libras
+    return pounds;
+}
 
- // We include fromEuroToDollar here as well because it needs to be exported
-module.exports = {  fromYenToPound, fromDollarToYen, fromEuroToDollar }
-
-
+// Exportamos las funciones para que puedan ser utilizadas en otros archivos
+module.exports = {
+    fromDollarToYen,
+    fromEuroToDollar,
+    fromYenToPound
+};
